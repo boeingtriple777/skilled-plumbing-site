@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import "./globals.css"; // <-- Add this line right here!
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://skilledplumbingservices.com"),

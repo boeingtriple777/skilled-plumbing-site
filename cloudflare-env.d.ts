@@ -12981,4 +12981,6 @@ declare abstract class WorkflowInstance {
         type: string;
         payload: unknown;
     }): Promise<void>;
+
+    
 }
