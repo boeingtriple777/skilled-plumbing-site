@@ -1,12 +1,14 @@
 import type { Metadata } from "next";
+
 export const metadata: Metadata = {
+  metadataBase: new URL("https://skilledplumbingservices.com"),
   title: "Skilled Plumbing Services",
   description: "Professional plumbing services",
-
   icons: {
-    icon: "/favicon.svg",
+    icon: "/favicon.ico",
+    apple: "/apple-touch-icon.png",
   },
-
+  manifest: "/site.webmanifest",
   openGraph: {
     title: "Skilled Plumbing Services",
     description: "Professional plumbing services",
@@ -22,3 +24,15 @@ export const metadata: Metadata = {
     type: "website",
   },
 };
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <html lang="en">
+      <body>{children}</body>
+    </html>
+  );
+}
