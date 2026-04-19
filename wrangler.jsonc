@@ -41,7 +41,7 @@
  "vars": {
     "NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME": "dppw8lfxp"
   }
-}
+
 	
 	/**
 	 * Smart Placement
@@ -61,3 +61,4 @@
 	 * https://developers.cloudflare.com/workers/configuration/secrets/
 	 */
 	// "vars": {  "MY_VARIABLE": "production_value" }
+}
