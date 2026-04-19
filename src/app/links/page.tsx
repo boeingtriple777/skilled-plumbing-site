@@ -19,7 +19,7 @@ const links = [
   { 
     label: "Request a Quote", 
     sub: "Contact us now ",
-    href: "/#quote", 
+    href: "/quote", 
   },
 ];
 

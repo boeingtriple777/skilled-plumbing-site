@@ -46,7 +46,7 @@ export default function WorkGallery() {
     <div className="flex items-center gap-3 md:gap-4">
       <img src="/logo.png" alt="Skilled Plumbing Logo" className="h-10 md:h-12 w-auto object-contain" />
       <div className="flex flex-col border-l border-slate-200 pl-3 md:pl-4">
-              <span className="text-sm font-bold tracking-tight text-slate-800">OUR WORK</span>
+              <span className="text-sm font-bold tracking-tight text-slate-800">SKILLED PLUMBING SERVICES</span>
               <span className="text-[10px] uppercase tracking-widest text-slate-500 font-medium">OLD SCHOOL CRAFTSMANSHIP</span>
       </div>
     </div>
@@ -128,7 +128,7 @@ export default function WorkGallery() {
         className="fixed bottom-6 md:bottom-8 left-1/2 z-40 w-[60%] md:w-auto max-w-sm"
       >
         <motion.div animate={{ y: [0, -4, 0] }} transition={{ repeat: Infinity, duration: 3, delay: 10.8 }}>
-          <a href="tel:+61" className="flex w-full justify-center items-center gap-2 bg-slate-900 text-white px-8 py-4 rounded-full shadow-2xl font-medium tracking-wide transition-all duration-300 hover:bg-slate-800 active:scale-95 backdrop-blur-md">
+          <a href="/quote" className="flex w-full justify-center items-center gap-2 bg-slate-900 text-white px-8 py-4 rounded-full shadow-2xl font-medium tracking-wide transition-all duration-300 hover:bg-slate-800 active:scale-95 backdrop-blur-md">
             <span>Get a Free Quote</span>
           </a>
         </motion.div>
