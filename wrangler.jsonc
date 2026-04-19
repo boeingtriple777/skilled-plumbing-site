@@ -6,6 +6,8 @@
  * For more details on how to configure Wrangler, refer to:
  * https://developers.cloudflare.com/workers/wrangler/configuration/
  */
+
+ 
 {
 	"$schema": "node_modules/wrangler/config-schema.json",
 	"name": "skilled-plumbing-site",
@@ -35,7 +37,12 @@
 	"observability": {
 		"enabled": true
 	},
-	"upload_source_maps": true
+	"upload_source_maps": true,
+ "vars": {
+    "NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME": "dppw8lfxp"
+  }
+}
+	
 	/**
 	 * Smart Placement
 	 * https://developers.cloudflare.com/workers/configuration/smart-placement/#smart-placement
@@ -54,4 +61,3 @@
 	 * https://developers.cloudflare.com/workers/configuration/secrets/
 	 */
 	// "vars": {  "MY_VARIABLE": "production_value" }
-}
