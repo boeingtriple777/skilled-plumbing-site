@@ -13,10 +13,12 @@
     "cf-typegen": "wrangler types --env-interface CloudflareEnv ./cloudflare-env.d.ts"
   },
   "dependencies": {
+    "@icons-pack/react-simple-icons": "^13.11.1",
     "@opennextjs/cloudflare": "^1.17.1",
     "cloudinary": "^2.9.0",
     "dotenv": "^17.4.2",
     "framer-motion": "^12.38.0",
+    "lucide-react": "^1.8.0",
     "next": "16.1.5",
     "next-cloudinary": "^6.17.5",
     "react": "19.1.5",
