@@ -6,22 +6,26 @@ export default function QuotePage() {
     
 <div className="min-h-screen bg-[#FAFAFA] pt-20 pb-20 px-6">    
     
-          {/* Sticky Header */}
-      <header className="fixed top-0 w-full z-50 border-b border-slate-200/50 bg-white/70 backdrop-blur-md">
+     {/* Sticky Header */}
+<header className="fixed top-0 w-full z-50 border-b border-slate-200/50 bg-white/70 backdrop-blur-md">
   <div className="max-w-7xl mx-auto px-4 md:px-6 h-20 flex items-center justify-between">
     
     {/* Branding */}
-    
-    <div className="flex items-center gap-3 md:gap-4">
+    <a href="/" className="flex items-center gap-3 md:gap-4 hover:opacity-80 transition-opacity">
       <img src="/logo.png" alt="Skilled Plumbing Logo" className="h-10 md:h-12 w-auto object-contain" />
       <div className="flex flex-col border-l border-slate-200 pl-3 md:pl-4">
-              <span className="text-sm font-bold tracking-tight text-slate-800">SKILLED PLUMBING SERVICES</span>
-              <span className="text-[10px] uppercase tracking-widest text-slate-500 font-medium">OLD SCHOOL SERVICE</span>
+        <span className="text-sm font-bold tracking-tight text-slate-800">SKILLED PLUMBING SERVICES</span>
+        <span className="text-[10px] uppercase tracking-widest text-slate-500 font-medium">OLD SCHOOL SERVICE</span>
       </div>
-    </div>
+    </a>
 
   </div>
 </header>
+
+
+
+      {/* Gallery Spacer (To prevent header overlap) */}
+      <div className="h-5" />
 
       <div className="max-w-xl mx-auto">
         <motion.div 
