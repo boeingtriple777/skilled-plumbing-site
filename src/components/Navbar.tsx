@@ -14,12 +14,12 @@ export default function Navbar() {
     { name: "Get a Quote", href: "/quote" },
     { name: "Our Work", href: "/gallery" },
     { name: "Our Services", href: "/our-services" },
-    { name: "About Us", href: "/About" },
+    { name: "About Us", href: "/about" },
     { name: "Links", href: "/links" },
   ];
 
   // Filter out the current page so we only show "where to go next"
-  const availableLinks = navLinks.filter(link => link.href !== pathname);
+  const availableLinks = navLinks;
 
   return (
     <header className="fixed top-0 w-full z-50 border-b border-slate-200/50 bg-white/70 backdrop-blur-md">
