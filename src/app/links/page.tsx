@@ -25,7 +25,7 @@ const links = [
 
 export default function LinkTree() {
   return (
-    <div className="min-h-screen bg-[#FAFAFA] flex flex-col items-center px-6 pt-16 pb-20 relative overflow-hidden">
+ <div className="min-h-screen bg-[#FAFAFA] pt-28 md:pt-32 pb-20 px-6">
       
       
       {/* Subtle Background Accent to match the main site */}

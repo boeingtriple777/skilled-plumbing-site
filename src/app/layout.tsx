@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import "./globals.css"; // <-- Add this line right here!
+import "./globals.css"; 
+import Navbar from "@/components/Navbar";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://skilledplumbingservices.com"),
@@ -33,7 +34,15 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body className="antialiased bg-[#FAFAFA]">
+        <Navbar />
+        {/* Since the Navbar is 'fixed', we add a top padding to 
+            the main container so our content doesn't hide behind it.
+        */}
+<main >         
+   {children}
+        </main>
+      </body>
     </html>
   );
 }

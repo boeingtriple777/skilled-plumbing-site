@@ -1,7 +1,11 @@
 import type { NextConfig } from "next";
 
-const nextConfig: NextConfig = {
-	/* config options here */
+const nextConfig = {
+  experimental: {
+    serverActions: {
+      bodySizeLimit: '20mb', // Set this to at least 20mb for 5 high-res photos
+    },
+  },
 };
 
 export default nextConfig;
