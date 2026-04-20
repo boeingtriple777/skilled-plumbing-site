@@ -36,9 +36,7 @@ export default function RootLayout({
     <html lang="en">
       <body className="antialiased bg-[#FAFAFA]">
         <Navbar />
-        {/* Since the Navbar is 'fixed', we add a top padding to 
-            the main container so our content doesn't hide behind it.
-        */}
+   
 <main >         
    {children}
         </main>
