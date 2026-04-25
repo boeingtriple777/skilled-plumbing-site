@@ -1,7 +1,5 @@
 "use server";
 
-import { s3Client } from "@/lib/s3";
-import { PutObjectCommand } from "@aws-sdk/client-s3";
 import { Resend } from "resend";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
@@ -28,7 +26,7 @@ const ALLOWED_MIME_TYPES = [
   "image/heic",
 ];
 
-export async function submitQuote(formData) {
+export async function submitQuote(formData, env) {
   try {
     const files = formData.getAll("photo");
 
@@ -78,14 +76,11 @@ export async function submitQuote(formData) {
           "_"
         )}`;
 
-        await s3Client.send(
-          new PutObjectCommand({
-            Bucket: process.env.R2_BUCKET_NAME,
-            Key: fileName,
-            Body: buffer,
-            ContentType: file.type,
-          })
-        );
+      await env.R2_BUCKET.put(fileName, buffer, {
+  httpMetadata: {
+    contentType: file.type,
+  },
+});
 
         photoUrls.push(
           `${process.env.R2_PUBLIC_URL}/${fileName}`
@@ -138,6 +133,7 @@ export async function submitQuote(formData) {
     return { success: true };
   } catch (error) {
     console.error("submitQuote error:", error);
+    
     return {
       success: false,
       error: "Failed to submit quote. Please try again.",
