@@ -14,7 +14,7 @@ export default function Navbar() {
     { name: "Get a Quote", href: "/quote" },
     { name: "Our Work", href: "/gallery" },
     { name: "Our Services", href: "/our-services" },
-    { name: "About Us", href: "/about" },
+    //{ name: "About Us", href: "/about" },
     { name: "Links", href: "/links" },
   ];
 
@@ -39,15 +39,15 @@ export default function Navbar() {
         {/* Desktop Nav */}
 <nav className="hidden md:flex items-center gap-6">
   {availableLinks.map((link) => {
-    const isQuoteButton = link.href === '/quote';
+    const isActive = pathname === link.href;
 
     return (
       <Link 
         key={link.href}
         href={link.href}
         className={`text-[10px] uppercase tracking-[0.2em] font-bold transition-all px-5 py-2.5 rounded-full ${
-          isQuoteButton 
-            ? 'bg-slate-900 text-white hover:bg-slate-800 shadow-md active:scale-95' 
+          isActive
+            ? 'bg-slate-900 text-white shadow-md' 
             : 'text-slate-400 hover:text-slate-900 hover:bg-slate-100/50'
         }`}
       >
@@ -56,6 +56,7 @@ export default function Navbar() {
     );
   })}
 </nav>
+   
 
           {/* Burger Button */}
           <button 

@@ -31,8 +31,7 @@ export default function LinkTree() {
       {/* Subtle Background Accent to match the main site */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[500px] bg-[radial-gradient(circle_at_top,_rgba(226,232,240,0.3)_0%,_transparent_70%)] pointer-events-none" />
 
-      <div className="z-10 w-full max-w-md flex flex-col items-center">
-        {/* Logo - Slightly smaller for elegance */}
+<div className="z-10 w-full max-w-md mx-auto flex flex-col items-center">        {/* Logo - Slightly smaller for elegance */}
         <img src="/logo.png" className="h-28 w-auto mb-6 drop-shadow-sm" alt="Skilled Plumbing" />
         
        <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-slate-200 text-slate-500 text-[11px] font-bold uppercase tracking-[0.2em] mb-10 w-fit mx-auto text-center">
@@ -70,7 +69,7 @@ export default function LinkTree() {
             Skilled Plumbing Services
           </p>
           <p className="text-[10px] text-slate-500 font-medium">
-            Plumbing & Gas • <span className="text-slate-900">PL1234</span>
+            <span className="text-slate-900">PL11063 | GF20308</span>
           </p>
         </div>
       </div>

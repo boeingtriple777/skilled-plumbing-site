@@ -1,14 +1,12 @@
 "use server";
 
-export const runtime = "nodejs";
-
 import { s3Client } from "@/lib/s3";
 import { PutObjectCommand } from "@aws-sdk/client-s3";
 import { Resend } from "resend";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-// basic HTML escape to prevent broken emails
+// Basic HTML escape to prevent broken emails
 function escapeHtml(str = "") {
   return String(str)
     .replaceAll("&", "&amp;")
@@ -18,9 +16,29 @@ function escapeHtml(str = "") {
     .replaceAll("'", "&#039;");
 }
 
+// SECURITY CONSTANTS
+const MAX_FILES = 5;
+const MAX_FILE_SIZE_MB = 5; // 5MB limit per file (well above your 0.8MB client compression)
+const MAX_FILE_SIZE_BYTES = MAX_FILE_SIZE_MB * 1024 * 1024;
+const ALLOWED_MIME_TYPES = [
+  "image/jpeg",
+  "image/jpg",
+  "image/png",
+  "image/webp",
+  "image/heic",
+];
+
 export async function submitQuote(formData) {
   try {
     const files = formData.getAll("photo");
+
+    // -----------------------------
+    // SECURITY 1: Hard limit on file count
+    // -----------------------------
+    if (files.length > MAX_FILES) {
+      console.warn(`Blocked upload: Exceeded max files (${files.length})`);
+      return { success: false, error: `Maximum of ${MAX_FILES} photos allowed.` };
+    }
 
     const name = formData.get("name") || "";
     const phone = formData.get("phone") || "";
@@ -36,6 +54,22 @@ export async function submitQuote(formData) {
     if (Array.isArray(files)) {
       for (const file of files) {
         if (!(file instanceof File) || file.size === 0) continue;
+
+        // -----------------------------
+        // SECURITY 2: Hard limit on file size
+        // -----------------------------
+        if (file.size > MAX_FILE_SIZE_BYTES) {
+          console.warn(`Blocked upload: File too large (${file.size} bytes)`);
+          return { success: false, error: `Each photo must be strictly under ${MAX_FILE_SIZE_MB}MB.` };
+        }
+
+        // -----------------------------
+        // SECURITY 3: Validate File Type
+        // -----------------------------
+        if (!ALLOWED_MIME_TYPES.includes(file.type)) {
+          console.warn(`Blocked upload: Invalid file type (${file.type})`);
+          return { success: false, error: "Invalid file format. Only images are allowed." };
+        }
 
         const buffer = Buffer.from(await file.arrayBuffer());
 
@@ -64,7 +98,7 @@ export async function submitQuote(formData) {
     // -----------------------------
     await resend.emails.send({
       from: "Skilled Quotes <quotes@skilledplumbingservices.com>",
-      to: "jacobmcgrath@me.com",
+      to: "ren@skilledplumbingservices.com",
       subject: `New Website Quote Request: ${name}`,
       html: `
         <div style="font-family: Arial, sans-serif; max-width:600px;">
