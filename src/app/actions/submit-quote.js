@@ -26,7 +26,7 @@ const ALLOWED_MIME_TYPES = [
   "image/heic",
 ];
 
-export async function submitQuote(formData, env) {
+export async function submitQuote(formData) {
   try {
     const files = formData.getAll("photo");
 
@@ -71,16 +71,17 @@ export async function submitQuote(formData, env) {
 
         const buffer = Buffer.from(await file.arrayBuffer());
 
-        const fileName = `quotes/${Date.now()}-${file.name.replaceAll(
+      const fileName = `quotes/${Date.now()}-${file.name.replaceAll(
           " ",
           "_"
         )}`;
 
-      await env.R2_BUCKET.put(fileName, buffer, {
-  httpMetadata: {
-    contentType: file.type,
-  },
-});
+      // Use process.env here instead of env
+      await process.env.R2_BUCKET.put(fileName, buffer, {
+        httpMetadata: {
+          contentType: file.type,
+        },
+      });
 
         photoUrls.push(
           `${process.env.R2_PUBLIC_URL}/${fileName}`
