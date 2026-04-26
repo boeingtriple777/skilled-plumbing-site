@@ -76,16 +76,16 @@ export async function submitQuote(formData) {
           "_"
         )}`;
 
-      // Use process.env here instead of env
-      await process.env.R2_BUCKET.put(fileName, buffer, {
-        httpMetadata: {
-          contentType: file.type,
-        },
-      });
+    // 2. Update the R2 upload call:
+await process.env["R2_BUCKET"].put(fileName, buffer, {
+  httpMetadata: {
+    contentType: file.type,
+  },
+});
 
         photoUrls.push(
-          `${process.env.R2_PUBLIC_URL}/${fileName}`
-        );
+  `${process.env["R2_PUBLIC_URL"]}/${fileName}`
+);
       }
     }
 
