@@ -1,7 +1,9 @@
+export const revalidate = 3600;
+export const dynamic = "force-dynamic";
+
 import { v2 as cloudinary } from "cloudinary";
 import WorkGallery from "./WorkGallery"; // Adjust import path as needed
 
-export const revalidate = 3600; 
 
 // 1. Configure the Cloudinary Node SDK
 cloudinary.config({
