@@ -1,8 +1,11 @@
 "use server";
 
 import { Resend } from "resend";
+// 1. Import the OpenNext Cloudflare context helper
+import { getCloudflareContext } from "@opennextjs/cloudflare";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+// process.env works great here because it's just a string!
+const resend = new Resend(process.env["RESEND_API_KEY"]);
 
 // Basic HTML escape to prevent broken emails
 function escapeHtml(str = "") {
@@ -16,7 +19,7 @@ function escapeHtml(str = "") {
 
 // SECURITY CONSTANTS
 const MAX_FILES = 5;
-const MAX_FILE_SIZE_MB = 5; // 5MB limit per file (well above your 0.8MB client compression)
+const MAX_FILE_SIZE_MB = 5; 
 const MAX_FILE_SIZE_BYTES = MAX_FILE_SIZE_MB * 1024 * 1024;
 const ALLOWED_MIME_TYPES = [
   "image/jpeg",
@@ -28,11 +31,13 @@ const ALLOWED_MIME_TYPES = [
 
 export async function submitQuote(formData) {
   try {
+    // 2. Grab the actual Cloudflare bindings object. 
+    // Passing { async: true } is the safest method inside Server Actions 
+    // to ensure the Next.js context isn't lost during the request.
+    const { env } = await getCloudflareContext({ async: true });
+
     const files = formData.getAll("photo");
 
-    // -----------------------------
-    // SECURITY 1: Hard limit on file count
-    // -----------------------------
     if (files.length > MAX_FILES) {
       console.warn(`Blocked upload: Exceeded max files (${files.length})`);
       return { success: false, error: `Maximum of ${MAX_FILES} photos allowed.` };
@@ -46,24 +51,15 @@ export async function submitQuote(formData) {
 
     let photoUrls = [];
 
-    // -----------------------------
-    // 1. Upload files to R2/S3
-    // -----------------------------
     if (Array.isArray(files)) {
       for (const file of files) {
         if (!(file instanceof File) || file.size === 0) continue;
 
-        // -----------------------------
-        // SECURITY 2: Hard limit on file size
-        // -----------------------------
         if (file.size > MAX_FILE_SIZE_BYTES) {
           console.warn(`Blocked upload: File too large (${file.size} bytes)`);
           return { success: false, error: `Each photo must be strictly under ${MAX_FILE_SIZE_MB}MB.` };
         }
 
-        // -----------------------------
-        // SECURITY 3: Validate File Type
-        // -----------------------------
         if (!ALLOWED_MIME_TYPES.includes(file.type)) {
           console.warn(`Blocked upload: Invalid file type (${file.type})`);
           return { success: false, error: "Invalid file format. Only images are allowed." };
@@ -71,27 +67,25 @@ export async function submitQuote(formData) {
 
         const buffer = Buffer.from(await file.arrayBuffer());
 
-      const fileName = `quotes/${Date.now()}-${file.name.replaceAll(
+        const fileName = `quotes/${Date.now()}-${file.name.replaceAll(
           " ",
           "_"
         )}`;
 
-    // 2. Update the R2 upload call:
-await process.env["R2_BUCKET"].put(fileName, buffer, {
-  httpMetadata: {
-    contentType: file.type,
-  },
-});
+        // 3. Use the OpenNext env to access the R2 object methods
+        await env.R2_BUCKET.put(fileName, buffer, {
+          httpMetadata: {
+            contentType: file.type,
+          },
+        });
 
+        // process.env is still correct here because R2_PUBLIC_URL is a string variable!
         photoUrls.push(
-  `${process.env["R2_PUBLIC_URL"]}/${fileName}`
-);
+          `${process.env["R2_PUBLIC_URL"]}/${fileName}`
+        );
       }
     }
 
-    // -----------------------------
-    // 2. Send email via Resend
-    // -----------------------------
     await resend.emails.send({
       from: "Skilled Quotes <quotes@skilledplumbingservices.com>",
       to: "ren@skilledplumbingservices.com",
