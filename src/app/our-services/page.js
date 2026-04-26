@@ -9,8 +9,7 @@ export default function ServicesPage() {
 
   // Grouped the raw list into logical, customer-friendly categories
   const categories = [
-    
-      {
+    {
       id: "installations-renovations",
       title: "Renovations & Home Extensions",
       desc: "From minor bathroom updates to complete structural plumbing for new builds. We work with you to ensure perfect placement and flawless finishes.",
@@ -21,29 +20,26 @@ export default function ServicesPage() {
         "Home Renovations", 
         "Extensions & Additions", 
         "Wall Chasing & Concrete Cutting", 
-        
       ]
     },
-    
     {
       id: "emergency-blockages",
       title: "Blocked Drains",
       desc: "Fast, reliable response when you need it most. We use specialized equipment to clear stubborn blockages and secure burst pipes to prevent property damage.",
-      imageId: "IMG_0729_ccrlrv", 
-      icon: <Siren className="w-6 h-6" />,
+      imageId: "general_repairs_1_aoxt4g", 
+      icon: <Wrench className="w-6 h-6" />,
       services: [
-          "Blocked Toilets",
-          "Blocked Showers",
-          "Blocked Basins",
-          "Blocked Sinks",
+        "Blocked Toilets",
+        "Blocked Showers",
+        "Blocked Basins",
+        "Blocked Sinks",
       ]
     },
-  
     {
       id: "general-maintenance",
       title: "Hot Water, Maintenance & General Repairs",
       desc: "Don't let minor leaks turn into major headaches. We handle all the day-to-day plumbing fixes to keep your home running efficiently.",
-      imageId: "general_repairs_1_aoxt4g", 
+      imageId: "hotty3_gsobsn", 
       icon: <Wrench className="w-6 h-6" />,
       services: [
         "Leaking Taps", 
@@ -80,6 +76,7 @@ export default function ServicesPage() {
             src="IMG_0746_3_zk87u4" // A good wide installation shot
             fill
             priority
+            sizes="100vw" // ADDED: Tells browser this is a full-width image
             alt="Skilled Plumbing Services"
             className="object-cover"
           />
@@ -120,7 +117,7 @@ export default function ServicesPage() {
                       src={category.imageId}
                       fill
                       alt={category.title}
-                      sizes="(max-width: 1024px) 100vw, 50vw"
+                      sizes="(max-width: 1024px) 100vw, 50vw" // This was already perfect!
                       className="object-cover transition-transform duration-700 hover:scale-105"
                     />
                     <div className="absolute top-6 left-6 bg-white/90 backdrop-blur-sm p-3 rounded-xl shadow-lg text-blue-600">
@@ -177,7 +174,7 @@ export default function ServicesPage() {
             <Link href="/quote" className="bg-white text-blue-700 hover:bg-slate-50 font-bold py-4 px-10 rounded-xl shadow-xl transition duration-300 active:scale-95">
               Request a Free Quote
             </Link>
-              </div>
+          </div>
         </div>
       </section>
 

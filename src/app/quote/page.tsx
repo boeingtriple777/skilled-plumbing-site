@@ -5,6 +5,7 @@ import { submitQuote } from "../actions/submit-quote";
 import { motion, AnimatePresence } from "framer-motion";
 import imageCompression from 'browser-image-compression';
 import Link from 'next/link';
+import { Turnstile } from '@marsidev/react-turnstile';
 
 export default function QuotePage() {
   const [isSubmitting, setIsSubmitting] = useState(false);

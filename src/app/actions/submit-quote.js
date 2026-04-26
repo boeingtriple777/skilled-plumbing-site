@@ -4,8 +4,11 @@ import { Resend } from "resend";
 // 1. Import the OpenNext Cloudflare context helper
 import { getCloudflareContext } from "@opennextjs/cloudflare";
 
+
 // process.env works great here because it's just a string!
 const resend = new Resend(process.env["RESEND_API_KEY"]);
+
+
 
 // Basic HTML escape to prevent broken emails
 function escapeHtml(str = "") {
@@ -27,7 +30,10 @@ const ALLOWED_MIME_TYPES = [
   "image/png",
   "image/webp",
   "image/heic",
+  
 ];
+
+
 
 export async function submitQuote(formData) {
   try {
