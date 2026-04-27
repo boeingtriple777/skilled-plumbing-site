@@ -242,7 +242,7 @@ async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
             </div>
           </div>
   {/* Turnstile Widget */}
-          {/*<div className="flex justify-center w-full py-2">
+          /*<div className="flex justify-center w-full py-2">
             <Turnstile
               siteKey="0x4AAAAAADDfTtikCpTQkFpl"
               onSuccess={(token) => setTurnstileToken(token)}
@@ -251,12 +251,12 @@ async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
               options={{ theme: 'light' }}
             />
           </div>
-          */}
+          
 
           <button 
             type="submit" 
             // Disable if submitting, no files attached, or Turnstile hasn't passed
-            disabled={isSubmitting || allFiles.length === 0 }
+            disabled={isSubmitting || allFiles.length === 0 || !turnstileToken}
             className="w-full bg-slate-900 text-white py-5 rounded-2xl font-bold shadow-xl hover:bg-slate-800 transition-all active:scale-[0.98] disabled:bg-slate-300 flex items-center justify-center gap-3"
           >
             {isSubmitting ? "Processing..." : "Send Request"}
