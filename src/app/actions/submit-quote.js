@@ -28,6 +28,8 @@ const ALLOWED_MIME_TYPES = [
   "image/heic",
 ];
 
+const R2_PUBLIC_URL = "https://media.skilledplumbingservices.com";
+
 export async function submitQuote(formData) {
   try {
     // ==========================================
@@ -107,7 +109,8 @@ export async function submitQuote(formData) {
         });
 
         photoUrls.push(
-`${process.env["R2_PUBLIC_URL"]}/${fileName}`        );
+          `${R2_PUBLIC_URL}/${fileName}`
+        );
       }
     }
 
