@@ -107,8 +107,7 @@ export async function submitQuote(formData) {
         });
 
         photoUrls.push(
-  `${env.R2_PUBLIC_URL}/${fileName}`//
-        );
+`${process.env["R2_PUBLIC_URL"]}/${fileName}`        );
       }
     }
 
