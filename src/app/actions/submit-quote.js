@@ -1,14 +1,10 @@
 "use server";
 
 import { Resend } from "resend";
-// 1. Import the OpenNext Cloudflare context helper
 import { getCloudflareContext } from "@opennextjs/cloudflare";
-
 
 // process.env works great here because it's just a string!
 const resend = new Resend(process.env["RESEND_API_KEY"]);
-
-
 
 // Basic HTML escape to prevent broken emails
 function escapeHtml(str = "") {
@@ -30,16 +26,42 @@ const ALLOWED_MIME_TYPES = [
   "image/png",
   "image/webp",
   "image/heic",
-  
 ];
-
-
 
 export async function submitQuote(formData) {
   try {
-    // 2. Grab the actual Cloudflare bindings object. 
-    // Passing { async: true } is the safest method inside Server Actions 
-    // to ensure the Next.js context isn't lost during the request.
+    // ==========================================
+    // 1. TURNSTILE SECURITY CHECK (FAIL FAST)
+    // ==========================================
+    const token = formData.get('cf-turnstile-response');
+
+    if (!token) {
+      console.warn('Blocked submission: Missing Turnstile token');
+      return { success: false, error: 'Please complete the security check.' };
+    }
+
+    const verifyEndpoint = 'https://challenges.cloudflare.com/turnstile/v0/siteverify';
+    const secretKey = process.env["TURNSTILE_SECRET_KEY"]; // Make sure this matches your .env key!
+
+    const verificationResponse = await fetch(verifyEndpoint, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: `secret=${encodeURIComponent(secretKey)}&response=${encodeURIComponent(token.toString())}`,
+    });
+
+    const verificationData = await verificationResponse.json();
+
+    if (!verificationData.success) {
+      console.error('Turnstile verification failed:', verificationData['error-codes']);
+      return { success: false, error: 'Security verification failed. Please try again.' };
+    }
+
+
+    // ==========================================
+    // 2. PROCESS UPLOADS & DATA
+    // ==========================================
     const { env } = await getCloudflareContext({ async: true });
 
     const files = formData.getAll("photo");
@@ -78,23 +100,24 @@ export async function submitQuote(formData) {
           "_"
         )}`;
 
-        // 3. Use the OpenNext env to access the R2 object methods
         await env.R2_BUCKET.put(fileName, buffer, {
           httpMetadata: {
             contentType: file.type,
           },
         });
 
-        // process.env is still correct here because R2_PUBLIC_URL is a string variable!
         photoUrls.push(
           `${process.env["R2_PUBLIC_URL"]}/${fileName}`
         );
       }
     }
 
+    // ==========================================
+    // 3. SEND EMAIL NOTIFICATION
+    // ==========================================
     await resend.emails.send({
       from: "Skilled Quotes <quotes@skilledplumbingservices.com>",
-      to: "ren@skilledplumbingservices.com",
+      to: "jacobmcgrath@me.com",
       subject: `New Website Quote Request: ${name}`,
       html: `
         <div style="font-family: Arial, sans-serif; max-width:600px;">

@@ -42,7 +42,7 @@ export default function HomePage() {
     },
     {
       title: "Blocked Drains",
-      desc: "Specialized equipment to clear stubborn blockages and prevent future issues.",
+      desc: "Specialised equipment to clear stubborn blockages and prevent future issues.",
       imageId: "IMG_1194_cvyz0e",
       icon: <Wrench className="w-6 h-6" />
     },
@@ -111,7 +111,7 @@ export default function HomePage() {
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
           <div className="max-w-2xl">
             <h2 className="text-sm font-bold tracking-widest text-blue-600 uppercase mb-3">What we do</h2>
-            <h3 className="text-4xl font-bold text-slate-900 leading-tight">Proffesional Plumbing & Gas Solutions</h3>
+            <h3 className="text-4xl font-bold text-slate-900 leading-tight">Professional Plumbing & Gas Solutions</h3>
           </div>
           <Link href="/our-services" className="hidden md:flex items-center gap-2 text-blue-600 font-bold hover:gap-3 transition-all">
             View All Services <ArrowRight className="w-5 h-5" />

@@ -11,7 +11,9 @@ export default function QuotePage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   
-  // These now act as our "Staging Area"
+  // Turnstile State
+  const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
+  
   const [previews, setPreviews] = useState<string[]>([]);
   const [allFiles, setAllFiles] = useState<File[]>([]); 
   
@@ -22,7 +24,6 @@ export default function QuotePage() {
   const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const newlySelected = Array.from(e.target.files || []);
     
-    // Check total limit (current + new)
     if (allFiles.length + newlySelected.length > 5) {
       alert("Please limit your request to 5 photos total.");
       return;
@@ -35,6 +36,7 @@ export default function QuotePage() {
       maxWidthOrHeight: 1920,
       useWebWorker: true
     };
+
 
     try {
       const compressed = await Promise.all(
@@ -61,18 +63,21 @@ export default function QuotePage() {
     setAllFiles(prev => prev.filter((_, i) => i !== index));
   };
 
-  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setIsSubmitting(true);
 
     try {
       const formData = new FormData(e.currentTarget);
-      formData.delete("photo"); // Remove empty input state
+      formData.delete("photo"); 
       
       allFiles.forEach(file => {
         formData.append("photo", file);
       });
 
+      // The Turnstile token is already in formData here 
+      // under the key 'cf-turnstile-response'
+      
       await submitQuote(formData);
       setIsSuccess(true);
       window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -236,9 +241,22 @@ export default function QuotePage() {
   </label>              <textarea name="description" rows={4} maxLength={1500} required disabled={isSubmitting} className="w-full bg-white border border-slate-200 rounded-xl p-4 focus:ring-2 focus:ring-slate-900/5 transition-all text-slate-800 disabled:opacity-50" placeholder="Tell us about the job..." />
             </div>
           </div>
- <button 
+  {/* Turnstile Widget */}
+          {/*<div className="flex justify-center w-full py-2">
+            <Turnstile
+              siteKey="0x4AAAAAADDfTtikCpTQkFpl"
+              onSuccess={(token) => setTurnstileToken(token)}
+              onError={() => setTurnstileToken(null)}
+              onExpire={() => setTurnstileToken(null)}
+              options={{ theme: 'light' }}
+            />
+          </div>
+          */}
+
+          <button 
             type="submit" 
-            disabled={isSubmitting || allFiles.length === 0}
+            // Disable if submitting, no files attached, or Turnstile hasn't passed
+            disabled={isSubmitting || allFiles.length === 0 }
             className="w-full bg-slate-900 text-white py-5 rounded-2xl font-bold shadow-xl hover:bg-slate-800 transition-all active:scale-[0.98] disabled:bg-slate-300 flex items-center justify-center gap-3"
           >
             {isSubmitting ? "Processing..." : "Send Request"}
