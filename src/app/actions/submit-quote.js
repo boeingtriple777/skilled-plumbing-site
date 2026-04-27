@@ -119,7 +119,7 @@ export async function submitQuote(formData) {
     // ==========================================
     await resend.emails.send({
       from: "Skilled Quotes <quotes@skilledplumbingservices.com>",
-      to: "jacobmcgrath@me.com",
+      to: "ren@skilledplumbingservices.com",
       subject: `New Website Quote Request: ${name}`,
       html: `
         <div style="font-family: Arial, sans-serif; max-width:600px;">
