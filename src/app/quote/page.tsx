@@ -242,7 +242,7 @@ async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
             </div>
           </div>
   {/* Turnstile Widget */}
-          /*<div className="flex justify-center w-full py-2">
+          <div className="flex justify-center w-full py-2">
             <Turnstile
               siteKey="0x4AAAAAADDfTtikCpTQkFpl"
               onSuccess={(token) => setTurnstileToken(token)}
