@@ -14,7 +14,7 @@ cloudinary.config({
 });
 
 export default async function GalleryPage() {
-  // 2. Fetch the folder contents
+  // 2. Fetch the folder contents.
   // Change 'skilled-plumbing-gallery' to whatever Ren's folder is actually named in Cloudinary
   const { resources } = await cloudinary.search
     .expression("folder:portfolio/*")
