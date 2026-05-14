@@ -98,9 +98,20 @@ export default function HomePage() {
             </div>
 
             <div className="flex flex-wrap gap-x-8 gap-y-4 text-xs sm:text-sm font-medium text-slate-00 uppercase tracking-wider">
-              <span className="flex items-center gap-2"><CheckCircle className="w-4 h-4 text-blue-400"/> Free Quotes & Site Visits</span>
-              <span className="flex items-center gap-2"><CheckCircle className="w-4 h-4 text-blue-400"/> Transparent Processes From Start to Finish</span>
-              <span className="flex items-center gap-2"><CheckCircle className="w-4 h-4 text-blue-400"/> Only quality work completed to Australian Standards (AS/NZS 3500 & 5601)</span>
+<span className="flex items-center gap-2">
+  <CheckCircle className="w-4 h-4 shrink-0 text-blue-400"/>
+  Free Quotes & Site Visits
+</span>
+
+<span className="flex items-center gap-2">
+  <CheckCircle className="w-4 h-4 shrink-0 text-blue-400"/>
+  Transparent Processes From Start to Finish
+</span>
+
+<span className="flex items-center gap-2">
+  <CheckCircle className="w-4 h-4 shrink-0 text-blue-400"/>
+  Only quality work completed to Australian Standards (AS/NZS 3500 & 5601)
+</span>
             </div>
           </div>
         </div>
