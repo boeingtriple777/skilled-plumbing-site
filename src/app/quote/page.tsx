@@ -150,7 +150,7 @@ async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
         <form onSubmit={handleSubmit} className="space-y-6">
           <div className="grid grid-cols-1 gap-6">
             <div>
-  <label className="block text-[10px] uppercase tracking-widest font-bold text-slate-400 mb-2">
+  <label className="block text-[10px] uppercase tracking-widest font-bold text-black mb-2">
     Name <span className="text-red-500 ml-0.5">*</span>
   </label>
   <input 
@@ -164,21 +164,21 @@ async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
   />
 </div>
              <div>
-<label className="block text-[10px] uppercase tracking-widest font-bold text-slate-400 mb-2">
+<label className="block text-[10px] uppercase tracking-widest font-bold text-black-400 mb-2">
     Phone Number <span className="text-red-500 ml-0.5">*</span>
   </label>              <input name="phone"     maxLength={10}
- type="tel" className="w-full bg-white border border-slate-200 rounded-xl p-4 focus:ring-2 focus:ring-slate-900/5 transition-all text-slate-800 disabled:opacity-50" placeholder="0400 000 000" />
+ type="tel" className="w-full bg-white border border-slate-200 rounded-xl p-4 focus:ring-2 focus:ring-slate-900/5 transition-all text-slate-800 disabled:opacity-50" />
             </div>
             
             <div>
-              <label className="block text-[10px] uppercase tracking-widest font-bold text-slate-400 mb-2">Email</label>
+              <label className="block text-[10px] uppercase tracking-widest font-bold text-slate mb-2">Email</label>
               <input name="email" type="email"  maxLength={30} className="w-full bg-white border border-slate-200 rounded-xl p-4 focus:ring-2 focus:ring-slate-900/5 transition-all text-slate-800 disabled:opacity-50"  />
             </div>
 
             
 
             <div>
-             <label className="block text-[10px] uppercase tracking-widest font-bold text-slate-400 mb-2">
+             <label className="block text-[10px] uppercase tracking-widest font-bold text-black mb-2">
     Suburb <span className="text-red-500 ml-0.5">*</span>
   </label>
               <input ref={autoCompleteRef} name="address" type="text" maxLength={20} disabled={isSubmitting} className="w-full bg-white border border-slate-200 rounded-xl p-4 focus:ring-2 focus:ring-slate-900/5 transition-all text-slate-800 disabled:opacity-50"  />
@@ -186,7 +186,7 @@ async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
 
  {/* UPGRADED Photo Section */}
             <div className="space-y-4">
-             <label className="block text-[10px] uppercase tracking-widest font-bold text-slate-400 mb-2">
+             <label className="block text-[10px] uppercase tracking-widest font-bold text-black mb-2">
     PHOTOS OF THE JOB <span className="text-red-500 ml-0.5">*</span>
   </label>
 
@@ -236,11 +236,12 @@ async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
             </div>
 
             <div>
-<label className="block text-[10px] uppercase tracking-widest font-bold text-slate-400 mb-2">
+<label className="block text-[10px] uppercase tracking-widest font-bold text-black mb-2">
     Message <span className="text-red-500 ml-0.5">*</span>
   </label>              <textarea name="description" rows={4} maxLength={1500} required disabled={isSubmitting} className="w-full bg-white border border-slate-200 rounded-xl p-4 focus:ring-2 focus:ring-slate-900/5 transition-all text-slate-800 disabled:opacity-50" placeholder="Tell us about the job..." />
             </div>
           </div>
+                     
   {/* Turnstile Widget */}
           <div className="flex justify-center w-full py-2">
             <Turnstile
@@ -261,6 +262,9 @@ async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
           >
             {isSubmitting ? "Processing..." : "Send Request"}
           </button>
+          <p className="text-xs text-center text-slate-500">
+              We will only use your details to respond to your enquiry. <br></br>For more information, please read our <Link href="/privacy-policy" className="underline hover:text-slate-800 transition-colors">Privacy Policy</Link>.
+            </p>
         </form>
       </div>
     </div>
