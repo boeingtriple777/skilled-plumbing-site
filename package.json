@@ -24,12 +24,15 @@
     "lucide-react": "^1.8.0",
     "next": "16.1.5",
     "next-cloudinary": "^6.17.5",
+    "openai": "^6.38.0",
     "react": "19.1.5",
     "react-dom": "19.1.5",
     "react-photo-album": "^3.6.0",
     "resend": "^6.12.0",
     "usehooks-ts": "^3.1.1",
-    "yet-another-react-lightbox": "^3.31.0"
+    "xero-node": "^17.0.0",
+    "yet-another-react-lightbox": "^3.31.0",
+    "zod": "^4.4.3"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

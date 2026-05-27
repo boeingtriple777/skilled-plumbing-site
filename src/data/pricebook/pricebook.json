@@ -1,0 +1,179 @@
+[
+  {
+    "service_id": "svc_tap_service",
+    "category": "Tapware",
+    "service_name": "Tap Service",
+    "customer_description": "Lubricate and service existing taps.",
+    "search_keywords": [
+      "dripping tap",
+      "leaking spout",
+      "stiff handle",
+      "squeaking tap",
+      "changing washers",
+      "laundry tap leaking",
+      "kitchen tap dripping"
+    ],
+    "required_questions": [
+      "Are the taps hard to turn on and off?"
+    ],
+    "total_estimated_price": 95
+  },
+  {
+    "service_id": "svc_tap_wall_assembly",
+    "category": "Tapware",
+    "service_name": "Wall Top Assembly Replacement",
+    "customer_description": "Supply and install a pair of premium wall-top tap assemblies (handles and flanges), including standard washers, lubricated spindles, and dynamic pressure testing.",
+    "search_keywords": [
+      "cracked handle",
+      "corroded tap flange",
+      "loose wall taps",
+      "shiny chrome knobs",
+      "missing handle button",
+      "bathroom wall taps"
+    ],
+    "required_questions": [
+      "Are the wall top taps chrome?"
+    ],
+    "total_estimated_price": 150
+  },
+  {
+    "service_id": "svc_shower_set",
+    "category": "Tapware",
+    "service_name": "Shower Set Replacement",
+    "customer_description": "Supply and install a new standard all-directional shower set, including premium standard jumpers and wall assembly testing.",
+    "search_keywords": [
+      "leaking shower tap",
+      "stiff shower handle",
+      "dripping shower rose",
+      "standard jumper valve shower",
+      "replacing shower dials"
+    ],
+    "required_questions": [
+      "Wall or ceiling mounted? Are the existing handles difficult to turn completely off?"
+    ],
+    "total_estimated_price": 212.5
+  },
+  {
+    "service_id": "svc_shower_set_ceramic",
+    "category": "Tapware",
+    "service_name": "Shower Set Replacement 1/4 Turn Ceramic",
+    "customer_description": "Supply and install an upgraded 1/4 turn ceramic disc shower tap set for smooth, low-maintenance operation.",
+    "search_keywords": [
+      "ceramic disc upgrade",
+      "quarter turn shower",
+      "lever style taps",
+      "arthritis friendly taps",
+      "smooth turn handles"
+    ],
+    "required_questions": [
+      "Is the shower head wall or ceiling mounted?"
+    ],
+    "total_estimated_price": 302.5
+  },
+  {
+    "service_id": "svc_shower_head",
+    "category": "Tapware",
+    "service_name": "Shower Head Replacement",
+    "customer_description": "Remove existing shower head assembly and install a new standard chrome all-directional arm and rose.",
+    "search_keywords": [
+      "clogged shower head",
+      "broken shower arm",
+      "rusty shower rose",
+      "low water pressure shower",
+      "spraying sideways"
+    ],
+    "required_questions": [
+      "Is the shower head wall or ceiling mounted?"
+    ],
+    "total_estimated_price": 105
+  },
+  {
+    "service_id": "svc_tap_basin_set",
+    "category": "Tapware",
+    "service_name": "Basin Set Replacement",
+    "customer_description": "Supply and install new basin set",
+    "search_keywords": [
+      "bathroom sink tap",
+      "vanity mixer replacement",
+      "basin spout leaking",
+      "three piece basin set"
+    ],
+    "required_questions": [
+      "Is the basin a single-hole drop-in vanity, or a traditional 3-piece setup with separate hot/cold handles?"
+    ],
+    "total_estimated_price": 390
+  },
+  {
+    "service_id": "svc_tap_basin_set_ceramic",
+    "category": "Tapware",
+    "service_name": "Basin Set 1/4 Turn Ceramic Disc Replacement",
+    "customer_description": "Supply and install a premium 1/4 turn ceramic disc basin mixer set, offering smooth lever operation, low maintenance, and precise flow control.",
+    "search_keywords": [
+      "ceramic basin tap",
+      "quarter turn vanity taps",
+      "lever basin set",
+      "bathroom sink upgrade",
+      "smooth turn basin knobs",
+      "modern vanity tapware"
+    ],
+    "required_questions": [
+      "Is the current basin set standard jumper valves or a quarter-turn ceramic model?"
+    ],
+    "total_estimated_price": 465
+  },
+  {
+    "service_id": "svc_bath_set",
+    "category": "Tapware",
+    "service_name": "Bath Set Replacement",
+    "customer_description": "Supply and install new bath set.",
+    "search_keywords": [
+      "bath taps",
+      "bathtub spout",
+      "bath set replacement",
+      "tub faucet leaking",
+      "wall bath assembly",
+      "separate hot and cold bath knobs",
+      "low profile tub spout"
+    ],
+    "required_questions": [
+      "Is the bath spout a standard fixed model, or does it have a diverter lift-pin on it to switch water up to a shower?"
+    ],
+    "total_estimated_price": 202.5
+  },
+  {
+    "service_id": "svc_bath_set_ceramic",
+    "category": "Tapware",
+    "service_name": "Bath Set 1/4 Turn Ceramic Disc Replacement",
+    "customer_description": "Supply and install an upgraded 1/4 turn ceramic disc wall bath assembly set for easy, drip-free operation and modern aesthetics.",
+    "search_keywords": [
+      "ceramic bath taps",
+      "lever tub handles",
+      "quarter turn bath set",
+      "arthritis friendly bath taps",
+      "premium tub knobs"
+    ],
+    "required_questions": [
+      "Is the existing bathtub spout mounted directly into the wall tiles or resting on a hob/ledge?"
+    ],
+    "total_estimated_price": 267.5
+  },
+  {
+    "service_id": "svc_kitchen_wall_sink",
+    "category": "Tapware",
+    "service_name": "Kitchen Wall Sink Set Replacement",
+    "customer_description": "Supply and install a traditional wall-mounted kitchen sink tap set, complete with separate hot and cold controls and an extended swivel spout.",
+    "search_keywords": [
+      "kitchen mixer faucet",
+      "gooseneck tap",
+      "kitchen lever replacement",
+      "pull out spray tap",
+      "veggie spray mixer",
+      "sink tap leaking at base",
+      "modern kitchen faucet"
+    ],
+    "required_questions": [
+      "Does the current kitchen mixer have a pull-out spray hose, or is it a standard fixed goose-neck style?"
+    ],
+    "total_estimated_price": 227.5
+  }
+]
