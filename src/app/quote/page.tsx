@@ -10,6 +10,7 @@ import { Turnstile } from '@marsidev/react-turnstile';
 export default function QuotePage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
   
   // Turnstile State
   const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
@@ -66,23 +67,27 @@ export default function QuotePage() {
 async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setIsSubmitting(true);
+    setSubmitError(null);
 
     try {
       const formData = new FormData(e.currentTarget);
-      formData.delete("photo"); 
-      
+      formData.delete("photo");
+
       allFiles.forEach(file => {
         formData.append("photo", file);
       });
 
-      // The Turnstile token is already in formData here 
-      // under the key 'cf-turnstile-response'
-      
-      await submitQuote(formData);
-      setIsSuccess(true);
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      const result = await submitQuote(formData);
+
+      if (result?.success) {
+        setIsSuccess(true);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else {
+        setSubmitError(result?.error ?? "Submission failed. Please try again.");
+      }
     } catch (error) {
-      alert("Submission failed. Please try again.");
+      const message = error instanceof Error ? error.message : String(error);
+      setSubmitError(`Submission failed: ${message}`);
     } finally {
       setIsSubmitting(false);
     }
@@ -254,9 +259,14 @@ async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
           </div>
           
 
-          <button 
-            type="submit" 
-            // Disable if submitting, no files attached, or Turnstile hasn't passed
+          {submitError && (
+            <div className="bg-red-50 border border-red-200 text-red-700 rounded-xl px-4 py-3 text-sm">
+              <span className="font-semibold">Error: </span>{submitError}
+            </div>
+          )}
+
+          <button
+            type="submit"
             disabled={isSubmitting || allFiles.length === 0 || !turnstileToken}
             className="w-full bg-slate-900 text-white py-5 rounded-2xl font-bold shadow-xl hover:bg-slate-800 transition-all active:scale-[0.98] disabled:bg-slate-300 flex items-center justify-center gap-3"
           >

@@ -43,7 +43,7 @@ export async function submitQuote(formData) {
     }
 
     const verifyEndpoint = 'https://challenges.cloudflare.com/turnstile/v0/siteverify';
-    const secretKey = process.env["TURNSTILE_SECRET_KEY"]; // Make sure this matches your .env key!
+    const secretKey = process.env["TURNSTILE_SECRET_KEY"];
 
     const verificationResponse = await fetch(verifyEndpoint, {
       method: 'POST',
@@ -159,10 +159,12 @@ export async function submitQuote(formData) {
     return { success: true };
   } catch (error) {
     console.error("submitQuote error:", error);
-    
+
+    const detail = error instanceof Error ? error.message : String(error);
+
     return {
       success: false,
-      error: "Failed to submit quote. Please try again.",
+      error: `Failed to submit quote: ${detail}`,
     };
   }
 }
