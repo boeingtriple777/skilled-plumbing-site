@@ -1,5 +1,17 @@
+import type { Metadata } from "next";
+
 export const revalidate = 3600;
-export const dynamic = "force-dynamic";
+
+export const metadata: Metadata = {
+  title: "Our Work | Skilled Plumbing Services Perth",
+  description:
+    "Browse completed plumbing and gas fitting jobs across Perth. Real workmanship examples from Fremantle, southern suburbs and surrounding areas.",
+  openGraph: {
+    title: "Our Work | Skilled Plumbing Services Perth",
+    description:
+      "Browse completed plumbing and gas fitting jobs across Perth. Real workmanship examples from Fremantle, southern suburbs and surrounding areas.",
+  },
+};
 
 import { v2 as cloudinary } from "cloudinary";
 import WorkGallery from "./WorkGallery"; // Adjust import path as needed

@@ -1,5 +1,11 @@
+import type { Metadata } from "next";
 import { SiInstagram } from "@icons-pack/react-simple-icons";
 import { ArrowRight, ExternalLink } from "lucide-react";
+
+export const metadata: Metadata = {
+  title: "Links | Skilled Plumbing Services",
+  robots: { index: false, follow: false },
+};
 
 const links = [
   { 

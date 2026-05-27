@@ -4,16 +4,21 @@ import Navbar from "@/components/Navbar";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://skilledplumbingservices.com"),
-  title: "Skilled Plumbing Services",
-  description: "Professional plumbing services",
+  title: {
+    default: "Plumber Perth | Skilled Plumbing Services",
+    template: "%s | Skilled Plumbing Services",
+  },
+  description:
+    "Licensed plumber serving Fremantle, southern suburbs and all of Perth, WA. Expert plumbing and gas fitting — hot water systems, blocked drains, renovations and more. Free quotes.",
   icons: {
     icon: "/favicon.ico",
     apple: "/apple-touch-icon.png",
   },
   manifest: "/site.webmanifest",
   openGraph: {
-    title: "Skilled Plumbing Services",
-    description: "Professional plumbing services",
+    title: "Plumber Perth | Skilled Plumbing Services",
+    description:
+      "Licensed plumber serving Fremantle, southern suburbs and all of Perth, WA. Expert plumbing and gas fitting — hot water systems, blocked drains, renovations and more. Free quotes.",
     url: "https://skilledplumbingservices.com",
     siteName: "Skilled Plumbing Services",
     images: [
@@ -24,6 +29,7 @@ export const metadata: Metadata = {
       },
     ],
     type: "website",
+    locale: "en_AU",
   },
 };
 
