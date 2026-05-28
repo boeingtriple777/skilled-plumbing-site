@@ -91,7 +91,7 @@
     "service_id": "svc_tap_basin_set",
     "category": "Tapware",
     "service_name": "Basin Set Replacement",
-    "customer_description": "Supply and install new basin set",
+    "customer_description": "Supply and install new basin set.",
     "search_keywords": [
       "bathroom sink tap",
       "vanity mixer replacement",
@@ -163,17 +163,497 @@
     "service_name": "Kitchen Wall Sink Set Replacement",
     "customer_description": "Supply and install a traditional wall-mounted kitchen sink tap set, complete with separate hot and cold controls and an extended swivel spout.",
     "search_keywords": [
-      "kitchen mixer faucet",
-      "gooseneck tap",
-      "kitchen lever replacement",
-      "pull out spray tap",
-      "veggie spray mixer",
-      "sink tap leaking at base",
-      "modern kitchen faucet"
+      "wall mounted kitchen tap",
+      "kitchen wall tap leaking",
+      "separate hot cold kitchen taps",
+      "swivel spout kitchen",
+      "wall sink set replacement"
     ],
     "required_questions": [
-      "Does the current kitchen mixer have a pull-out spray hose, or is it a standard fixed goose-neck style?"
+      "Are the kitchen taps wall-mounted with separate hot and cold handles (not a single mixer)?"
     ],
     "total_estimated_price": 227.5
+  },
+  {
+    "service_id": "svc_ks_sink_mixer_mini_stop",
+    "category": "Tapware",
+    "service_name": "Kitchen Sink Mixer Replacement (Including Mini Stop & Male Iron Press)",
+    "customer_description": "Supply and install a new bench-mounted kitchen sink mixer tap, including new under-bench isolation valves (mini stops) and male iron press fittings.",
+    "search_keywords": [
+      "kitchen mixer tap dripping",
+      "kitchen faucet leaking at base",
+      "bench mounted kitchen mixer",
+      "kitchen tap replacement",
+      "sink mixer leaking",
+      "kitchen tap no isolation valve"
+    ],
+    "required_questions": [
+      "Does the existing kitchen mixer have a pull-out spray hose or is it a standard fixed gooseneck style?"
+    ],
+    "total_estimated_price": 195
+  },
+  {
+    "service_id": "svc_ks_sink_mixer",
+    "category": "Tapware",
+    "service_name": "Kitchen Sink Mixer Replacement",
+    "customer_description": "Supply and install a new bench-mounted kitchen sink mixer tap (existing under-bench isolation valves retained).",
+    "search_keywords": [
+      "kitchen sink mixer broken",
+      "bench tap replacement",
+      "kitchen faucet dripping",
+      "kitchen mixer handle broken",
+      "kitchen tap upgrade"
+    ],
+    "required_questions": [
+      "Does the existing kitchen mixer have a pull-out spray hose or is it a standard fixed gooseneck style?",
+      "Are there existing isolation valves (mini stops) under the sink in good condition?"
+    ],
+    "total_estimated_price": 160
+  },
+  {
+    "service_id": "svc_basin_mixer_mini_stop",
+    "category": "Tapware",
+    "service_name": "Basin Mixer Replacement (Including Mini Stop & Male Iron Press)",
+    "customer_description": "Supply and install a new single-lever basin mixer tap, including new under-basin isolation valves (mini stops) and male iron press fittings.",
+    "search_keywords": [
+      "single lever basin tap leaking",
+      "basin mixer dripping",
+      "bathroom tap replacement",
+      "single hole vanity tap",
+      "basin tap leaking at base"
+    ],
+    "required_questions": [
+      "Is the existing basin tap a single-lever mixer or a separate hot/cold handle set?"
+    ],
+    "total_estimated_price": 190
+  },
+  {
+    "service_id": "svc_basin_mixer",
+    "category": "Tapware",
+    "service_name": "Basin Mixer Replacement",
+    "customer_description": "Supply and install a new single-lever basin mixer tap (existing under-basin isolation valves retained).",
+    "search_keywords": [
+      "bathroom basin mixer broken",
+      "single lever vanity tap",
+      "basin mixer handle stiff",
+      "basin tap upgrade",
+      "bathroom mixer dripping"
+    ],
+    "required_questions": [
+      "Is the existing basin tap a single-lever mixer or a separate hot/cold handle set?",
+      "Are there existing isolation valves (mini stops) under the basin in good condition?"
+    ],
+    "total_estimated_price": 155
+  },
+  {
+    "service_id": "svc_garden_hose_cock",
+    "category": "Tapware",
+    "service_name": "Garden Hose Cock Replacement",
+    "customer_description": "Supply and install a new 1/4 turn garden hose cock on external wall with male thread connection.",
+    "search_keywords": [
+      "garden tap leaking",
+      "outside tap dripping",
+      "hose tap replacement",
+      "external wall tap broken",
+      "tap on outside of house leaking",
+      "garden hose tap"
+    ],
+    "required_questions": [
+      "Is the tap an external wall-mounted garden hose tap? Is it leaking from the body or from the hose connection?"
+    ],
+    "total_estimated_price": 72.5
+  },
+  {
+    "service_id": "svc_toilet_service",
+    "category": "Toilets",
+    "service_name": "Toilet Service",
+    "customer_description": "Service existing toilet cistern internals — inspect and replace inlet valve, flapper, washers, and flush mechanism as required.",
+    "search_keywords": [
+      "toilet keeps running",
+      "toilet not stopping",
+      "cistern hissing",
+      "toilet slow to refill",
+      "phantom flush",
+      "running toilet",
+      "toilet constantly filling",
+      "toilet cistern noise",
+      "toilet water not stopping"
+    ],
+    "required_questions": [
+      "Is the toilet continuously running after flushing, or making a hissing noise from the cistern?"
+    ],
+    "total_estimated_price": 130
+  },
+  {
+    "service_id": "svc_toilet_suite_customer_supplied",
+    "category": "Toilets",
+    "service_name": "Back To Wall Toilet Suite Installation (Customer Supplied)",
+    "customer_description": "Remove and dispose of existing toilet suite and install a customer-supplied back-to-wall toilet suite, connected to existing rough-in.",
+    "search_keywords": [
+      "install toilet I purchased",
+      "labour only toilet installation",
+      "back to wall toilet fitting",
+      "customer supplied toilet",
+      "toilet replacement labour"
+    ],
+    "required_questions": [
+      "Have you already purchased the replacement toilet suite?",
+      "What is the floor-to-wall rough-in distance (centre of drain to wall)?"
+    ],
+    "total_estimated_price": 635
+  },
+  {
+    "service_id": "svc_toilet_suite_uniset2",
+    "category": "Toilets",
+    "service_name": "Caroma Uniset 2 Toilet Suite Replacement",
+    "customer_description": "Supply and install a new Caroma Uniset 2 toilet suite, including removal and disposal of the existing suite.",
+    "search_keywords": [
+      "toilet suite replacement",
+      "toilet pan cracked",
+      "broken toilet",
+      "new toilet supply and install",
+      "toilet completely broken",
+      "cracked toilet bowl"
+    ],
+    "required_questions": [
+      "Is the existing toilet an S-trap (pipe exits through the floor) or a P-trap (pipe exits through the wall)?",
+      "What is the floor-to-wall rough-in distance?"
+    ],
+    "total_estimated_price": 775
+  },
+  {
+    "service_id": "svc_toilet_suite_aire",
+    "category": "Toilets",
+    "service_name": "Caroma Aire Toilet Suite Replacement",
+    "customer_description": "Supply and install a new Caroma Aire toilet suite, including removal and disposal of the existing suite.",
+    "search_keywords": [
+      "toilet suite replacement",
+      "broken toilet bowl",
+      "toilet upgrade",
+      "cracked toilet pan",
+      "full toilet replacement"
+    ],
+    "required_questions": [
+      "Is the existing toilet an S-trap (pipe exits through the floor) or a P-trap (pipe exits through the wall)?",
+      "What is the floor-to-wall rough-in distance?"
+    ],
+    "total_estimated_price": 735
+  },
+  {
+    "service_id": "svc_toilet_suite_tasman",
+    "category": "Toilets",
+    "service_name": "Caroma Tasman Toilet Suite Replacement",
+    "customer_description": "Supply and install a new Caroma Tasman toilet suite, including removal and disposal of the existing suite.",
+    "search_keywords": [
+      "toilet pan broken",
+      "cracked toilet",
+      "toilet needs replacing",
+      "new toilet installation",
+      "damaged toilet suite"
+    ],
+    "required_questions": [
+      "Is the existing toilet an S-trap (pipe exits through the floor) or a P-trap (pipe exits through the wall)?",
+      "What is the floor-to-wall rough-in distance?"
+    ],
+    "total_estimated_price": 625
+  },
+  {
+    "service_id": "svc_cistern_uniset2",
+    "category": "Toilets",
+    "service_name": "Caroma Uniset 2 Cistern Replacement",
+    "customer_description": "Supply and install a new Caroma Uniset 2 cistern including all internal mechanisms, connected to the existing toilet pan.",
+    "search_keywords": [
+      "toilet cistern cracked",
+      "broken cistern",
+      "cistern leaking externally",
+      "toilet tank cracked",
+      "cistern body broken",
+      "cracked toilet cistern lid"
+    ],
+    "required_questions": [
+      "Is just the cistern (tank) damaged, or is the toilet pan also cracked or broken?"
+    ],
+    "total_estimated_price": 440
+  },
+  {
+    "service_id": "svc_cistern_aire",
+    "category": "Toilets",
+    "service_name": "Caroma Aire Cistern Replacement",
+    "customer_description": "Supply and install a new Caroma Aire cistern including all internal mechanisms, connected to the existing toilet pan.",
+    "search_keywords": [
+      "cistern replacement",
+      "toilet tank broken",
+      "cracked cistern body",
+      "toilet cistern leaking from outside",
+      "cistern needs replacing"
+    ],
+    "required_questions": [
+      "Is just the cistern (tank) damaged, or is the toilet pan also cracked or broken?"
+    ],
+    "total_estimated_price": 420
+  },
+  {
+    "service_id": "svc_cistern_tasman",
+    "category": "Toilets",
+    "service_name": "Caroma Tasman Cistern Replacement",
+    "customer_description": "Supply and install a new Caroma Tasman cistern including all internal mechanisms, connected to the existing toilet pan.",
+    "search_keywords": [
+      "cracked toilet cistern",
+      "cistern body damaged",
+      "broken toilet tank",
+      "toilet cistern replacement"
+    ],
+    "required_questions": [
+      "Is just the cistern (tank) damaged, or is the toilet pan also cracked or broken?"
+    ],
+    "total_estimated_price": 400
+  },
+  {
+    "service_id": "svc_hw_130l_rheem_stellar_reece",
+    "category": "Hot Water",
+    "service_name": "130L Rheem Stellar Gas Storage Hot Water Swapover (Reece)",
+    "customer_description": "Supply and install a new 130L Rheem Stellar natural gas storage hot water system on a like-for-like swapover, including all fittings, valves, and plumbing permit.",
+    "search_keywords": [
+      "no hot water",
+      "hot water system broken",
+      "gas storage hot water leaking",
+      "hot water heater not working",
+      "Rheem hot water system",
+      "hot water tank rusting",
+      "water heater replacement",
+      "hot water cylinder broken"
+    ],
+    "required_questions": [
+      "Is the existing unit a natural gas storage hot water system?",
+      "What size (litres) is shown on the existing unit label?",
+      "Is there clear access around the unit for a straight swapover?"
+    ],
+    "total_estimated_price": 3249
+  },
+  {
+    "service_id": "svc_hw_135l_thermann_reece",
+    "category": "Hot Water",
+    "service_name": "135L Thermann Gas Storage Hot Water Swapover (Reece)",
+    "customer_description": "Supply and install a new 135L Thermann natural gas storage hot water system on a like-for-like swapover, including all fittings, valves, and plumbing permit.",
+    "search_keywords": [
+      "no hot water",
+      "hot water system broken",
+      "gas storage hot water leaking",
+      "Thermann hot water",
+      "135 litre hot water replacement",
+      "hot water heater leaking from base"
+    ],
+    "required_questions": [
+      "Is the existing unit a natural gas storage hot water system?",
+      "What size (litres) is shown on the existing unit label?",
+      "Is there clear access around the unit for a straight swapover?"
+    ],
+    "total_estimated_price": 2399
+  },
+  {
+    "service_id": "svc_hw_135l_rheem_reece",
+    "category": "Hot Water",
+    "service_name": "135L Rheem Gas Storage Hot Water Swapover (Reece)",
+    "customer_description": "Supply and install a new 135L Rheem natural gas storage hot water system on a like-for-like swapover, including all fittings, valves, and plumbing permit.",
+    "search_keywords": [
+      "no hot water",
+      "Rheem storage hot water broken",
+      "gas hot water not working",
+      "135L hot water replacement",
+      "storage tank leaking",
+      "hot water heater replacement"
+    ],
+    "required_questions": [
+      "Is the existing unit a natural gas storage hot water system?",
+      "What size (litres) is shown on the existing unit label?",
+      "Is there clear access around the unit for a straight swapover?"
+    ],
+    "total_estimated_price": 2949
+  },
+  {
+    "service_id": "svc_hw_160l_rheem_stellar_reece",
+    "category": "Hot Water",
+    "service_name": "160L Rheem Stellar Gas Storage Hot Water Swapover (Reece)",
+    "customer_description": "Supply and install a new 160L Rheem Stellar natural gas storage hot water system on a like-for-like swapover, including all fittings, valves, and plumbing permit.",
+    "search_keywords": [
+      "no hot water large house",
+      "160 litre hot water broken",
+      "Rheem Stellar replacement",
+      "gas storage hot water not working",
+      "large hot water system replacement"
+    ],
+    "required_questions": [
+      "Is the existing unit a natural gas storage hot water system?",
+      "What size (litres) is shown on the existing unit label?",
+      "Is there clear access around the unit for a straight swapover?"
+    ],
+    "total_estimated_price": 3399
+  },
+  {
+    "service_id": "svc_hw_170l_thermann_reece",
+    "category": "Hot Water",
+    "service_name": "170L Thermann Gas Storage Hot Water Swapover (Reece)",
+    "customer_description": "Supply and install a new 170L Thermann natural gas storage hot water system on a like-for-like swapover, including all fittings, valves, and plumbing permit.",
+    "search_keywords": [
+      "no hot water",
+      "170 litre hot water broken",
+      "Thermann hot water system",
+      "large gas storage hot water replacement",
+      "hot water not working large capacity"
+    ],
+    "required_questions": [
+      "Is the existing unit a natural gas storage hot water system?",
+      "What size (litres) is shown on the existing unit label?",
+      "Is there clear access around the unit for a straight swapover?"
+    ],
+    "total_estimated_price": 2850
+  },
+  {
+    "service_id": "svc_hw_135l_vulcan_samios",
+    "category": "Hot Water",
+    "service_name": "135L Vulcan Gas Storage Hot Water Swapover (Samios)",
+    "customer_description": "Supply and install a new 135L Vulcan natural gas storage hot water system on a like-for-like swapover, including all fittings, valves, and plumbing permit.",
+    "search_keywords": [
+      "no hot water",
+      "Vulcan hot water broken",
+      "gas hot water system not working",
+      "135L storage tank replacement",
+      "hot water heater leaking",
+      "Vulcan gas storage"
+    ],
+    "required_questions": [
+      "Is the existing unit a natural gas storage hot water system?",
+      "What size (litres) is shown on the existing unit label?",
+      "Is there clear access around the unit for a straight swapover?"
+    ],
+    "total_estimated_price": 2355
+  },
+  {
+    "service_id": "svc_hw_170l_vulcan_samios",
+    "category": "Hot Water",
+    "service_name": "170L Vulcan Gas Storage Hot Water Swapover (Samios)",
+    "customer_description": "Supply and install a new 170L Vulcan natural gas storage hot water system on a like-for-like swapover, including all fittings, valves, and plumbing permit.",
+    "search_keywords": [
+      "no hot water large house",
+      "Vulcan 170 litre broken",
+      "large gas storage hot water",
+      "170L hot water system replacement",
+      "Vulcan hot water not working"
+    ],
+    "required_questions": [
+      "Is the existing unit a natural gas storage hot water system?",
+      "What size (litres) is shown on the existing unit label?",
+      "Is there clear access around the unit for a straight swapover?"
+    ],
+    "total_estimated_price": 2734
+  },
+  {
+    "service_id": "svc_hw_cf_rheem_16l",
+    "category": "Hot Water",
+    "service_name": "Rheem 16L Continuous Flow Hot Water Swapover",
+    "customer_description": "Supply and install a new Rheem 16L natural gas continuous flow hot water unit on a like-for-like swapover, including all fittings, valves, and plumbing permit.",
+    "search_keywords": [
+      "continuous flow hot water broken",
+      "instant hot water not working",
+      "Rheem continuous flow",
+      "instantaneous hot water replacement",
+      "hot water runs out quickly",
+      "wall mounted hot water unit broken"
+    ],
+    "required_questions": [
+      "Is the existing unit a continuous flow (instantaneous) hot water system mounted on an external wall?",
+      "What brand and model number is visible on the unit label?"
+    ],
+    "total_estimated_price": 1850
+  },
+  {
+    "service_id": "svc_hw_cf_rheem_20l",
+    "category": "Hot Water",
+    "service_name": "Rheem 20L Continuous Flow Hot Water Swapover",
+    "customer_description": "Supply and install a new Rheem 20L natural gas continuous flow hot water unit on a like-for-like swapover, including all fittings, valves, and plumbing permit.",
+    "search_keywords": [
+      "continuous flow broken",
+      "Rheem 20L hot water",
+      "instantaneous hot water not working",
+      "continuous flow replacement",
+      "hot water system on wall broken"
+    ],
+    "required_questions": [
+      "Is the existing unit a continuous flow (instantaneous) hot water system mounted on an external wall?",
+      "What brand and model number is visible on the unit label?"
+    ],
+    "total_estimated_price": 1899
+  },
+  {
+    "service_id": "svc_hw_cf_rheem_26l",
+    "category": "Hot Water",
+    "service_name": "Rheem 26L Continuous Flow Hot Water Swapover",
+    "customer_description": "Supply and install a new Rheem 26L natural gas continuous flow hot water unit on a like-for-like swapover, including all fittings, valves, and plumbing permit.",
+    "search_keywords": [
+      "Rheem 26L broken",
+      "large continuous flow hot water",
+      "high flow hot water system",
+      "continuous flow not working",
+      "instantaneous hot water replacement large"
+    ],
+    "required_questions": [
+      "Is the existing unit a continuous flow (instantaneous) hot water system mounted on an external wall?",
+      "What brand and model number is visible on the unit label?"
+    ],
+    "total_estimated_price": 2049
+  },
+  {
+    "service_id": "svc_hw_cf_bosch_10p",
+    "category": "Hot Water",
+    "service_name": "Bosch 10P Continuous Flow Hot Water Swapover",
+    "customer_description": "Supply and install a new Bosch 10P natural gas continuous flow hot water unit on a like-for-like swapover, including all fittings, valves, and plumbing permit.",
+    "search_keywords": [
+      "Bosch hot water broken",
+      "Bosch continuous flow not working",
+      "instant hot water Bosch",
+      "Bosch 10P replacement",
+      "continuous flow unit broken"
+    ],
+    "required_questions": [
+      "Is the existing unit a continuous flow (instantaneous) hot water system mounted on an external wall?",
+      "What brand and model number is visible on the unit label?"
+    ],
+    "total_estimated_price": 1771
+  },
+  {
+    "service_id": "svc_hw_cf_bosch_10h",
+    "category": "Hot Water",
+    "service_name": "Bosch 10H Continuous Flow Hot Water Swapover",
+    "customer_description": "Supply and install a new Bosch 10H natural gas continuous flow hot water unit on a like-for-like swapover, including all fittings, valves, and plumbing permit.",
+    "search_keywords": [
+      "Bosch hot water not working",
+      "Bosch 10H broken",
+      "continuous flow Bosch replacement",
+      "instant hot water broken",
+      "Bosch unit leaking"
+    ],
+    "required_questions": [
+      "Is the existing unit a continuous flow (instantaneous) hot water system mounted on an external wall?",
+      "What brand and model number is visible on the unit label?"
+    ],
+    "total_estimated_price": 1895
+  },
+  {
+    "service_id": "svc_hw_cf_bosch_16h",
+    "category": "Hot Water",
+    "service_name": "Bosch 16H Continuous Flow Hot Water Swapover",
+    "customer_description": "Supply and install a new Bosch 16H natural gas continuous flow hot water unit on a like-for-like swapover, including all fittings, valves, and plumbing permit.",
+    "search_keywords": [
+      "Bosch 16H broken",
+      "large Bosch continuous flow",
+      "high capacity Bosch hot water",
+      "continuous flow system replacement",
+      "Bosch hot water not heating"
+    ],
+    "required_questions": [
+      "Is the existing unit a continuous flow (instantaneous) hot water system mounted on an external wall?",
+      "What brand and model number is visible on the unit label?"
+    ],
+    "total_estimated_price": 1994
   }
 ]
