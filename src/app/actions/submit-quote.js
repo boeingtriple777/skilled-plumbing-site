@@ -3,10 +3,18 @@
 import { Resend } from "resend";
 import { getCloudflareContext } from "@opennextjs/cloudflare";
 import OpenAI from "openai";
+import { z } from "zod";
 import PRICEBOOK from "@/data/pricebook/pricebook.json";
 
 const resend = new Resend(process.env["RESEND_API_KEY"]);
 const openai = new OpenAI({ apiKey: process.env["OPENAI_API_KEY"] });
+
+const formSchema = z.object({
+  name:        z.string().min(1, "Name is required").max(100),
+  phone:       z.string().min(1, "Phone is required").max(30),
+  address:     z.string().min(1, "Address is required").max(300),
+  description: z.string().max(2000).optional().default(""),
+});
 
 function escapeHtml(str = "") {
   return String(str)
@@ -42,13 +50,18 @@ export async function analyseQuote(formData) {
     const verificationData = await verificationResponse.json();
     if (!verificationData.success) return { success: false, error: "Security verification failed. Please try again." };
 
-    // 2. Extract fields
-    const name        = formData.get("name")        || "";
-    const phone       = formData.get("phone")       || "";
-    const email       = formData.get("email")       || "";
-    const address     = formData.get("address")     || "";
-    const description = formData.get("description") || "";
-    const files       = formData.getAll("photo");
+    // 2. Extract and validate fields
+    const parsed = formSchema.safeParse({
+      name:        formData.get("name")        || "",
+      phone:       formData.get("phone")       || "",
+      email:       formData.get("email")       || "",
+      address:     formData.get("address")     || "",
+      description: formData.get("description") || "",
+    });
+    if (!parsed.success) return { success: false, error: parsed.error.issues[0].message };
+
+    const { name, phone, email, address, description } = parsed.data;
+    const files = formData.getAll("photo");
 
     if (files.length > MAX_FILES) return { success: false, error: `Maximum of ${MAX_FILES} photos allowed.` };
 
@@ -62,7 +75,7 @@ export async function analyseQuote(formData) {
       if (!ALLOWED_MIME_TYPES.includes(file.type)) return { success: false, error: "Invalid file format. Only images are allowed." };
 
       const buffer   = Buffer.from(await file.arrayBuffer());
-      const fileName = `quotes/${Date.now()}-${file.name.replaceAll(" ", "_")}`;
+      const fileName = `quotes/${crypto.randomUUID()}-${file.name.replaceAll(" ", "_")}`;
       await env.R2_BUCKET.put(fileName, buffer, { httpMetadata: { contentType: file.type } });
       photoUrls.push(`${R2_PUBLIC_URL}/${fileName}`);
     }
@@ -81,6 +94,7 @@ export async function analyseQuote(formData) {
 
       const completion = await openai.chat.completions.create({
         model: "gpt-4o",
+        temperature: 0.2,
         response_format: { type: "json_object" },
         messages: [
           {
@@ -92,13 +106,38 @@ export async function analyseQuote(formData) {
             ${JSON.stringify(PRICEBOOK, null, 2)}
 
             INSTRUCTIONS:
-            1. Identify ALL services from the pricebook that apply to this job — a single job may need more than one line item.
+            0. RELEVANCE GATE — do this first, before anything else.
+               Determine whether the photos and/or description relate to plumbing, drainage, hot water, or bathroom/kitchen fixtures.
+               If the photos are clearly unrelated to plumbing (e.g. food, furniture, people, documents, outdoor scenery, pets, screens),
+               set "is_plumbing_related" to false and write a single friendly sentence in "out_of_scope_reason" explaining what was seen
+               (e.g. "The photos appear to show a desk and computer rather than any plumbing fixtures.").
+               Set all numeric fields to 0, and return empty arrays for everything else. Do NOT attempt pricebook matching.
+
+            1. ONLY match services from the pricebook that you are genuinely confident apply to this job.
+               It is better to return an empty "recommended_line_items" array than to force a match that doesn't fit.
+               A single job may need more than one line item — include all that clearly apply.
+
             2. For each matched service, use its exact "service_name" as the description and its "total_estimated_price" as the price. Do not alter prices.
+               Rate your "match_confidence" for each item as:
+                 "high"   — the fixture/issue is clearly identifiable in the photos or description
+                 "medium" — likely match but some ambiguity remains
+                 "low"    — best guess; the tradesperson should verify on-site
+
             3. "estimated_total" must be the sum of all matched line item prices.
+
             4. "summary" must be one plain-English sentence a busy tradie can read in 2 seconds — e.g. "Dripping wall-mounted shower tap likely needing a full shower set replacement."
+
             5. "visual_observations" should list 2–4 specific things you can see in the photos that informed your assessment.
-            6. "diagnostic_questions": include the "required_questions" from matched pricebook items ONLY if the answer would materially change the recommended service or price. If the customer's description and photos already make the job clear, return an empty array. Never force questions for the sake of it.
-            7. For "urgency_score" use this scale strictly:
+
+            6. "unmatched_items": if you can identify plumbing fixtures or issues in the photos that have no clear match in the pricebook,
+               list them here as plain-English strings (e.g. "Visible copper pipe corrosion near the hot water unit inlet").
+               This helps the tradesperson know what to investigate on-site.
+
+            7. "diagnostic_questions": include the "required_questions" from matched pricebook items ONLY if the answer would materially
+               change the recommended service or price. If the customer's description and photos already make the job clear, return an empty
+               array. Never force questions for the sake of it.
+
+            8. For "urgency_score" use this scale strictly:
                1 = Routine — no active leak, cosmetic or convenience issue, book within weeks
                2 = Soon — minor drip or wear, book within a week
                3 = Moderate — noticeable leak or dysfunction, book within a few days
@@ -107,12 +146,15 @@ export async function analyseQuote(formData) {
 
             Return a valid JSON object matching this schema exactly:
             {
+              "is_plumbing_related": boolean,
+              "out_of_scope_reason": "string or null",
               "summary": "string",
               "urgency_score": number (1-5),
               "urgency_label": "string (e.g. Routine / Soon / Moderate / Urgent / Emergency)",
               "estimated_total": number,
               "visual_observations": ["string"],
-              "recommended_line_items": [{ "description": "string", "estimated_price": number }],
+              "recommended_line_items": [{ "description": "string", "estimated_price": number, "match_confidence": "high | medium | low" }],
+              "unmatched_items": ["string"],
               "diagnostic_questions": ["string"]
             }`,
           },
@@ -132,9 +174,14 @@ export async function analyseQuote(formData) {
       console.error("⚠️ AI analysis failed:", aiError);
     }
 
+    const photoWarning = aiResult?.is_plumbing_related === false
+      ? (aiResult.out_of_scope_reason || "One or more of your photos don't appear to show plumbing work — did you accidentally upload the wrong photo from your camera roll?")
+      : null;
+
     return {
       success: true,
-      questions: aiResult?.diagnostic_questions ?? [],
+      questions: photoWarning ? [] : (aiResult?.diagnostic_questions ?? []),
+      photoWarning,
       photoUrls,
       aiResult,
       formFields: { name, phone, email, address, description },
@@ -151,7 +198,10 @@ export async function analyseQuote(formData) {
 // ============================================================
 export async function submitQuote({ formFields, photoUrls, aiResult, answers }) {
   try {
-    const { name, phone, email, address, description } = formFields;
+    const parsed = formSchema.safeParse(formFields);
+    if (!parsed.success) return { success: false, error: parsed.error.issues[0].message };
+
+    const { name, phone, email, address, description } = parsed.data;
 
     // AI block
     let aiHtmlBlock = "";
@@ -164,9 +214,19 @@ export async function submitQuote({ formFields, photoUrls, aiResult, answers }) 
         text: urgencyScore >= 4 ? "#991b1b" : urgencyScore === 3 ? "#854d0e" : "#166534",
       };
 
+      const confidenceBadge = (level) => {
+        const styles = {
+          high:   { bg: "#dcfce7", text: "#166534" },
+          medium: { bg: "#fef9c3", text: "#854d0e" },
+          low:    { bg: "#fee2e2", text: "#991b1b" },
+        };
+        const s = styles[level] || styles.medium;
+        return `<span style="background:${s.bg};color:${s.text};padding:2px 7px;border-radius:10px;font-size:11px;font-weight:600;margin-left:6px;">${escapeHtml(level || "")}</span>`;
+      };
+
       const lineItemsHtml = aiResult.recommended_line_items?.map((item) =>
         `<tr>
-          <td style="padding: 8px 0; color: #475569; border-bottom: 1px solid #f1f5f9;">${escapeHtml(item.description)}</td>
+          <td style="padding: 8px 0; color: #475569; border-bottom: 1px solid #f1f5f9;">${escapeHtml(item.description)}${item.match_confidence ? confidenceBadge(item.match_confidence) : ""}</td>
           <td style="padding: 8px 0; color: #1e293b; font-weight: bold; text-align: right; border-bottom: 1px solid #f1f5f9;">$${item.estimated_price}</td>
         </tr>`
       ).join("") || `<tr><td colspan="2" style="color:#94a3b8;">No specific items identified</td></tr>`;
@@ -176,9 +236,26 @@ export async function submitQuote({ formFields, photoUrls, aiResult, answers }) 
       ).join("") || "";
 
       const estimatedTotal = aiResult.estimated_total ?? 0;
-      emailSubjectSuffix   = ` — est. $${estimatedTotal}`;
+      emailSubjectSuffix   = `- estimate $${estimatedTotal}`;
+
+      const unmatchedHtml = aiResult.unmatched_items?.length
+        ? `<div style="background-color: #f8fafc; border: 1px solid #e2e8f0; border-left: 4px solid #94a3b8; padding: 14px 20px; border-radius: 6px; margin-bottom: 16px;">
+            <h4 style="margin: 0 0 8px 0; color: #64748b; font-size: 13px; text-transform: uppercase; letter-spacing: 0.05em;">Items seen but not in pricebook — investigate on-site</h4>
+            <ul style="margin: 0; padding-left: 18px; color: #64748b; font-size: 14px;">
+              ${aiResult.unmatched_items.map((o) => `<li style="margin-bottom:4px;">${escapeHtml(o)}</li>`).join("")}
+            </ul>
+          </div>`
+        : "";
+
+      const outOfScopeWarningHtml = aiResult.is_plumbing_related === false
+        ? `<div style="background-color: #fef9c3; border: 1px solid #fde047; border-left: 4px solid #eab308; padding: 14px 20px; border-radius: 6px; margin-bottom: 16px;">
+            <h4 style="margin: 0 0 6px 0; color: #854d0e; font-size: 13px; text-transform: uppercase; letter-spacing: 0.05em;">AI could not identify plumbing work in photos</h4>
+            <p style="margin: 0; color: #854d0e; font-size: 14px;">${escapeHtml(aiResult.out_of_scope_reason || "The uploaded photos did not appear to show plumbing fixtures or issues.")}</p>
+          </div>`
+        : "";
 
       aiHtmlBlock = `
+        ${outOfScopeWarningHtml}
         <!-- SUMMARY CARD -->
         <div style="background-color: #1e293b; color: #ffffff; padding: 20px 24px; border-radius: 8px; margin-bottom: 16px;">
           <p style="margin: 0 0 12px 0; font-size: 17px; line-height: 1.4;">${escapeHtml(aiResult.summary ?? "")}</p>
@@ -208,6 +285,8 @@ export async function submitQuote({ formFields, photoUrls, aiResult, answers }) 
             ${observationsHtml}
           </ul>
         </div>` : ""}
+
+        ${unmatchedHtml}
       `;
     }
 
@@ -264,7 +343,7 @@ export async function submitQuote({ formFields, photoUrls, aiResult, answers }) 
       `,
     });
 
-    return { success: true };
+    return { success: true, aiResult };
 
   } catch (error) {
     console.error("submitQuote error:", error);

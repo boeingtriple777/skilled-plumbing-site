@@ -205,8 +205,7 @@
       "kitchen tap upgrade"
     ],
     "required_questions": [
-      "Does the existing kitchen mixer have a pull-out spray hose or is it a standard fixed gooseneck style?",
-      "Are there existing isolation valves (mini stops) under the sink in good condition?"
+      "Does the existing kitchen mixer have a pull-out spray hose?"    
     ],
     "total_estimated_price": 160
   },
@@ -262,6 +261,26 @@
       "Is the tap an external wall-mounted garden hose tap? Is it leaking from the body or from the hose connection?"
     ],
     "total_estimated_price": 72.5
+  },
+  {
+    "service_id": "svc_toilet_isolation_valve",
+    "category": "Toilets",
+    "service_name": "Toilet Cistern Isolation Valve Replacement",
+    "customer_description": "Replace the quarter-turn angle stop (mini stop) isolation valve on the cold water supply line connecting to the toilet cistern.",
+    "search_keywords": [
+      "mini tap toilet",
+      "small tap behind toilet",
+      "tap where toilet connects to wall",
+      "toilet shutoff valve leaking",
+      "angle stop valve toilet",
+      "toilet supply valve broken",
+      "tap at base of toilet",
+      "toilet water valve leaking"
+    ],
+    "required_questions": [
+      "Is the valve leaking from the valve body itself, or from the connection where it meets the cistern or the flexible hose?"
+    ],
+    "total_estimated_price": 95
   },
   {
     "service_id": "svc_toilet_service",
