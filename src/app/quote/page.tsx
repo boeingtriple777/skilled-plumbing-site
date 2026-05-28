@@ -237,7 +237,7 @@ export default function QuotePage() {
     );
   }
 
-  // Step 2 — Follow-up questions
+  // Step 2 — Follow-up questions/
   if (step === 2 && pendingData) {
     return (
       <div className="min-h-screen bg-[#FAFAFA] pt-28 md:pt-32 pb-20 px-6">
