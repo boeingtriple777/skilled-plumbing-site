@@ -128,7 +128,8 @@ export default function QuotePage() {
           aiResult: result.aiResult,
           answers: [],
         });
-        setQuoteResult((submitResult as { aiResult?: Record<string, unknown> }).aiResult ?? null);
+        if (!submitResult.success) { alert(submitResult.error || "Submission failed."); return; }
+        setQuoteResult(result.aiResult ?? null);
         setStep(3);
         window.scrollTo({ top: 0, behavior: "smooth" });
         return;
@@ -169,7 +170,8 @@ export default function QuotePage() {
         aiResult: pendingData.aiResult,
         answers: answerObjects,
       });
-      setQuoteResult((submitResult as { aiResult?: Record<string, unknown> }).aiResult ?? null);
+      if (!submitResult.success) { alert(submitResult.error || "Submission failed."); return; }
+      setQuoteResult(pendingData.aiResult ?? null);
 
       setStep(3);
       window.scrollTo({ top: 0, behavior: "smooth" });
