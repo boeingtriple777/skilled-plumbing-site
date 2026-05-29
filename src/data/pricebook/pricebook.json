@@ -43,6 +43,7 @@
     "customer_description": "Supply and install a new standard all-directional shower set, including premium standard jumpers and wall assembly testing.",
     "search_keywords": [
       "leaking shower tap",
+      "rainfall shower",
       "stiff shower handle",
       "dripping shower rose",
       "standard jumper valve shower",
@@ -80,7 +81,13 @@
       "broken shower arm",
       "rusty shower rose",
       "low water pressure shower",
-      "spraying sideways"
+      "spraying sideways",
+      "shower head upgrade",
+      "replace shower head",
+      "new shower head",
+      "rainfall shower upgrade",
+      "shower rose upgrade",
+      "update shower head"
     ],
     "required_questions": [
       "Is the shower head wall or ceiling mounted?"
@@ -94,7 +101,9 @@
     "customer_description": "Supply and install new basin set.",
     "search_keywords": [
       "bathroom sink tap",
+      "bath spout and mixer",
       "vanity mixer replacement",
+      "basin mixer set",
       "basin spout leaking",
       "three piece basin set"
     ],
@@ -133,7 +142,13 @@
       "tub faucet leaking",
       "wall bath assembly",
       "separate hot and cold bath knobs",
-      "low profile tub spout"
+      "low profile tub spout",
+      "bath set upgrade",
+      "replace bath taps",
+      "new bath spout",
+      "bathtub mixer upgrade",
+      "update bath taps",
+      "bath mixer replacement"
     ],
     "required_questions": [
       "Is the bath spout a standard fixed model, or does it have a diverter lift-pin on it to switch water up to a shower?"
@@ -219,7 +234,14 @@
       "basin mixer dripping",
       "bathroom tap replacement",
       "single hole vanity tap",
-      "basin tap leaking at base"
+      "basin tap leaking at base",
+      "basin mixer upgrade",
+      "basin tap upgrade",
+      "replace basin mixer",
+      "new basin tap",
+      "vanity tap upgrade",
+      "bathroom tap upgrade",
+      "update basin tap"
     ],
     "required_questions": [
       "Is the existing basin tap a single-lever mixer or a separate hot/cold handle set?"
@@ -236,7 +258,13 @@
       "single lever vanity tap",
       "basin mixer handle stiff",
       "basin tap upgrade",
-      "bathroom mixer dripping"
+      "bathroom mixer dripping",
+      "basin mixer upgrade",
+      "replace basin tap",
+      "new basin mixer",
+      "vanity tap replacement",
+      "update bathroom tap",
+      "basin tap replacement"
     ],
     "required_questions": [
       "Is the existing basin tap a single-lever mixer or a separate hot/cold handle set?",
@@ -340,6 +368,7 @@
     ],
     "total_estimated_price": 775
   },
+
   {
     "service_id": "svc_toilet_suite_aire",
     "category": "Toilets",
@@ -674,5 +703,19 @@
       "What brand and model number is visible on the unit label?"
     ],
     "total_estimated_price": 1994
+  },
+    {
+    "service_id": "svc_downpipe_gutter",
+    "category": "Downpipe",
+    "service_name": "Downpipe installation",
+    "customer_description": "Supply and install up to one new downpipe.",
+    "search_keywords": [
+      "gutter",
+      "downpipe"
+    ],
+    "required_questions": [
+      "Do you need the downpipe painted or is white acceptable?"
+    ],
+    "total_estimated_price": 775
   }
 ]

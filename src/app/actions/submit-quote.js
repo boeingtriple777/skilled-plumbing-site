@@ -12,7 +12,7 @@ const openai = new OpenAI({ apiKey: process.env["OPENAI_API_KEY"] });
 const formSchema = z.object({
   name:        z.string().min(1, "Name is required").max(100),
   phone:       z.string().min(1, "Phone is required").max(30),
-  address:     z.string().min(1, "Address is required").max(300),
+  address:     z.string().min(1, "Suburb is required").max(300),
   description: z.string().max(2000).optional().default(""),
 });
 
@@ -100,7 +100,13 @@ export async function analyseQuote(formData) {
           {
             role: "system",
             content: `You are an expert quoting assistant for a professional plumbing service.
-            Analyze the customer's description and photos to identify all plumbing work likely required.
+            Analyze the customer's photos and description to identify all plumbing work likely required.
+
+            IMPORTANT — SOURCE OF TRUTH HIERARCHY:
+            1. PHOTOS are the primary source of truth. Match pricebook items based on what you can visually identify.
+            2. CUSTOMER DESCRIPTION is supplementary context only. It may provide useful hints (e.g. "it's been leaking for weeks", "the hot water runs cold") but it is often vague, incomplete, or a single generic word.
+               If the description is vague or generic (e.g. "fix", "broken", "help", "upgrade", "sort this out", "replace"), treat it as background noise and rely entirely on visual analysis of the photos.
+               Never leave recommended_line_items empty solely because the description is unclear — if you can see the fixture in a photo, match it.
 
             AUTHORIZED PRICEBOOK:
             ${JSON.stringify(PRICEBOOK, null, 2)}
@@ -112,6 +118,16 @@ export async function analyseQuote(formData) {
                set "is_plumbing_related" to false and write a single friendly sentence in "out_of_scope_reason" explaining what was seen
                (e.g. "The photos appear to show a desk and computer rather than any plumbing fixtures.").
                Set all numeric fields to 0, and return empty arrays for everything else. Do NOT attempt pricebook matching.
+
+            0.5. ITEM IDENTIFICATION — do this after the relevance gate, before pricebook matching.
+               Examine all photos together and identify each distinct physical plumbing fixture or issue present.
+               - If multiple photos clearly show the SAME fixture from different angles or distances, treat them as ONE item.
+               - If photos show DIFFERENT fixtures (e.g. three separate taps, a tap and a toilet), treat each as a SEPARATE item.
+                 Look for visual differences: brand names or markings, finish (chrome vs brass), handle style (lever vs cross-head vs mixer), location cues, or fixture type.
+               - Give each distinct item a short descriptive label, e.g. "Basin tap — chrome lever, left vanity" or "Shower head — rainfall, ensuite".
+               - Record all labels in "identified_items".
+               CRITICAL: when matching the pricebook, create a SEPARATE line item for each distinct identified item.
+               Three separate basin taps = three separate line items. Never merge distinct fixtures into one line item.
 
             1. ONLY match services from the pricebook that you are genuinely confident apply to this job.
                It is better to return an empty "recommended_line_items" array than to force a match that doesn't fit.
@@ -148,6 +164,7 @@ export async function analyseQuote(formData) {
             {
               "is_plumbing_related": boolean,
               "out_of_scope_reason": "string or null",
+              "identified_items": ["string"],
               "summary": "string",
               "urgency_score": number (1-5),
               "urgency_label": "string (e.g. Routine / Soon / Moderate / Urgent / Emergency)",
@@ -224,6 +241,15 @@ export async function submitQuote({ formFields, photoUrls, aiResult, answers }) 
         return `<span style="background:${s.bg};color:${s.text};padding:2px 7px;border-radius:10px;font-size:11px;font-weight:600;margin-left:6px;">${escapeHtml(level || "")}</span>`;
       };
 
+      const identifiedItemsHtml = aiResult.identified_items?.length
+        ? `<div style="background-color: #eff6ff; border: 1px solid #bfdbfe; border-left: 4px solid #3b82f6; padding: 14px 20px; border-radius: 6px; margin-bottom: 16px;">
+            <h4 style="margin: 0 0 8px 0; color: #1d4ed8; font-size: 13px; text-transform: uppercase; letter-spacing: 0.05em;">Items identified across photos (${aiResult.identified_items.length})</h4>
+            <ol style="margin: 0; padding-left: 18px; color: #1e40af; font-size: 14px;">
+              ${aiResult.identified_items.map((item) => `<li style="margin-bottom:4px;">${escapeHtml(item)}</li>`).join("")}
+            </ol>
+          </div>`
+        : "";
+
       const lineItemsHtml = aiResult.recommended_line_items?.map((item) =>
         `<tr>
           <td style="padding: 8px 0; color: #475569; border-bottom: 1px solid #f1f5f9;">${escapeHtml(item.description)}${item.match_confidence ? confidenceBadge(item.match_confidence) : ""}</td>
@@ -264,6 +290,8 @@ export async function submitQuote({ formFields, photoUrls, aiResult, answers }) 
             <span style="background-color: ${urgencyColors.bg}; color: ${urgencyColors.text}; padding: 3px 10px; border-radius: 12px; font-size: 13px; font-weight: 600;">${escapeHtml(aiResult.urgency_label ?? `Urgency ${urgencyScore}/5`)}</span>
           </div>
         </div>
+
+        ${identifiedItemsHtml}
 
         <!-- LINE ITEMS -->
         <div style="background-color: #f8fafc; border: 1px solid #e2e8f0; padding: 16px 20px; border-radius: 6px; margin-bottom: 16px;">
@@ -343,7 +371,7 @@ export async function submitQuote({ formFields, photoUrls, aiResult, answers }) 
       `,
     });
 
-    return { success: true, aiResult };
+    return { success: true };
 
   } catch (error) {
     console.error("submitQuote error:", error);
