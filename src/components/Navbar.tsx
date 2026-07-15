@@ -14,8 +14,9 @@ export default function Navbar() {
     { name: "Get a Quote", href: "/quote" },
     { name: "Our Work", href: "/gallery" },
     { name: "Our Services", href: "/our-services" },
-    //{ name: "About Us", href: "/about" },
     { name: "Links", href: "/links" },
+    { name: "Contact Us", href: "/contact" },
+
   ];
 
   // Filter out the current page so we only show "where to go next"
