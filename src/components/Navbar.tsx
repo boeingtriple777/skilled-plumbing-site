@@ -16,6 +16,8 @@ export default function Navbar() {
     { name: "Our Services", href: "/our-services" },
     //{ name: "About Us", href: "/about" },
     { name: "Links", href: "/links" },
+    { name: "Contact Us", href: "/contact-us" },
+
   ];
 
   // Filter out the current page so we only show "where to go next"
